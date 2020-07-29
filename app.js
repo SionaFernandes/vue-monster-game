@@ -16,12 +16,30 @@ new Vue({
       if (this.checkWin()) {
         return;
       }
+      this.monsterAttack();
+    },
+    specialAttack() {
+      this.monsterHealth -= this.calaculateDamage(10, 20);
+      if (this.checkWin()) {
+        return;
+      }
+      this.monsterAttack();
+    },
+    heal() {
+      if (this.playerHealth <= 90) {
+        this.playerHealth += 10;
+      } else {
+        this.playerHealth = 100;
+      }
+      this.monsterAttack();
+    },
+    giveUp() {
+      this.isgamerunning = false;
+    },
+    monsterAttack() {
       this.playerHealth -= this.calaculateDamage(5, 12);
       this.checkWin();
     },
-    specialAttack() {},
-    heal() {},
-    giveUp() {},
     calaculateDamage(min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
     },
